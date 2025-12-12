@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "568041793542",
+    "firebase_url": "https://garrafa-inteligente-9ec93-default-rtdb.firebaseio.com",
+    "project_id": "garrafa-inteligente-9ec93",
+    "storage_bucket": "garrafa-inteligente-9ec93.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:568041793542:android:d9b4106a4b192dabbebb87",
+        "android_client_info": {
+          "package_name": "com.example.garrafa_inteligente"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcAXx7DHvhCBGGDFxvqoHcOP0irB88gHk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,24 @@
+[2025-12-06 10:08:13,649] WARN [SocketServer listenerType=CONTROLLER, nodeId=1] Unexpected error from /147.185.132.73 (channelId=172.31.25.59:9093-147.185.132.73:62720-2-0); closing connection (org.apache.kafka.common.network.Selector)
+org.apache.kafka.common.network.InvalidReceiveException: Invalid receive (size = 369295616 larger than 104857600)
+	at org.apache.kafka.common.network.NetworkReceive.readFrom(NetworkReceive.java:95) ~[kafka-clients-4.0.0.jar:?]
+	at org.apache.kafka.common.network.KafkaChannel.receive(KafkaChannel.java:462) ~[kafka-clients-4.0.0.jar:?]
+	at org.apache.kafka.common.network.KafkaChannel.read(KafkaChannel.java:412) ~[kafka-clients-4.0.0.jar:?]
+	at org.apache.kafka.common.network.Selector.attemptRead(Selector.java:679) ~[kafka-clients-4.0.0.jar:?]
+	at org.apache.kafka.common.network.Selector.pollSelectionKeys(Selector.java:581) ~[kafka-clients-4.0.0.jar:?]
+	at org.apache.kafka.common.network.Selector.poll(Selector.java:486) ~[kafka-clients-4.0.0.jar:?]
+	at kafka.network.Processor.poll(SocketServer.scala:1017) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.network.Processor.run(SocketServer.scala:921) ~[kafka_2.13-4.0.0.jar:?]
+	at java.base/java.lang.Thread.run(Thread.java:1583) [?:?]
+[2025-12-06 10:08:13,770] WARN [SocketServer listenerType=CONTROLLER, nodeId=1] Unexpected error from /147.185.132.73 (channelId=172.31.25.59:9093-147.185.132.73:62726-0-1); closing connection (org.apache.kafka.common.network.Selector)
+org.apache.kafka.common.network.InvalidReceiveException: Invalid receive (size = 369295616 larger than 104857600)
+	at org.apache.kafka.common.network.NetworkReceive.readFrom(NetworkReceive.java:95) ~[kafka-clients-4.0.0.jar:?]
+	at org.apache.kafka.common.network.KafkaChannel.receive(KafkaChannel.java:462) ~[kafka-clients-4.0.0.jar:?]
+	at org.apache.kafka.common.network.KafkaChannel.read(KafkaChannel.java:412) ~[kafka-clients-4.0.0.jar:?]
+	at org.apache.kafka.common.network.Selector.attemptRead(Selector.java:679) ~[kafka-clients-4.0.0.jar:?]
+	at org.apache.kafka.common.network.Selector.pollSelectionKeys(Selector.java:581) ~[kafka-clients-4.0.0.jar:?]
+	at org.apache.kafka.common.network.Selector.poll(Selector.java:486) ~[kafka-clients-4.0.0.jar:?]
+	at kafka.network.Processor.poll(SocketServer.scala:1017) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.network.Processor.run(SocketServer.scala:921) ~[kafka_2.13-4.0.0.jar:?]
+	at java.base/java.lang.Thread.run(Thread.java:1583) [?:?]
+[2025-12-06 10:34:42,847] INFO [SnapshotGenerator id=1] Creating new KRaft snapshot file snapshot 00000000000000115528-0000000003 because we have waited at least 60 minute(s). (org.apache.kafka.image.publisher.SnapshotGenerator)
+[2025-12-06 10:34:42,858] INFO [SnapshotEmitter id=1] Successfully wrote snapshot 00000000000000115528-0000000003 (org.apache.kafka.image.publisher.SnapshotEmitter)

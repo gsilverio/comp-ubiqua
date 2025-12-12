@@ -1,0 +1,421 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 1073741824 bytes. Error detail: committing reserved memory.
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   This process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Unscaled Compressed Oops mode in which the Java heap is
+#     placed in the first 4GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 4GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (os_linux.cpp:2829), pid=17240, tid=17592
+#
+# JRE version:  (21.0.9+10) (build )
+# Java VM: OpenJDK 64-Bit Server VM (21.0.9+10-Ubuntu-124.04, mixed mode, sharing, tiered, compressed oops, compressed class ptrs, g1 gc, linux-amd64)
+# Core dump will be written. Default location: Core dumps may be processed with "/usr/share/apport/apport -p%p -s%s -c%c -d%d -P%P -u%u -g%g -F%F -- %E" (or dumping to /root/kafka_2.13-4.0.0/core.17240)
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -Xmx1G -Xms1G -XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:InitiatingHeapOccupancyPercent=35 -XX:+ExplicitGCInvokesConcurrent -XX:MaxInlineLevel=15 -Djava.awt.headless=true -Xlog:gc*:file=/root/kafka_2.13-4.0.0/bin/../logs/kafkaServer-gc.log:time,tags:filecount=10,filesize=100M -Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dkafka.logs.dir=/root/kafka_2.13-4.0.0/bin/../logs -Dlog4j2.configurationFile=bin/../config/log4j2.yaml kafka.Kafka config/server.properties
+
+Host: Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz, 15 cores, 957M, Ubuntu 24.04.3 LTS
+Time: Sat Dec  6 03:33:41 2025 UTC elapsed time: 0.013281 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0000727de401c840):  JavaThread "Unknown thread" [_thread_in_vm, id=17592, stack(0x0000727dead00000,0x0000727deae00000) (1024K)]
+
+Stack: [0x0000727dead00000,0x0000727deae00000],  sp=0x0000727deadfe500,  free space=1017k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [libjvm.so+0x101acdb]  VMError::report_and_die(int, char const*, char const*, __va_list_tag*, Thread*, unsigned char*, void*, void*, char const*, int, unsigned long)+0x27b  (os_linux.cpp:2829)
+V  [libjvm.so+0x101b741]
+V  [libjvm.so+0x6b3901]
+V  [libjvm.so+0xd0227d]  os::pd_commit_memory_or_exit(char*, unsigned long, unsigned long, bool, char const*)+0xdd
+V  [libjvm.so+0xcfba9f]  os::commit_memory_or_exit(char*, unsigned long, unsigned long, bool, char const*)+0x1f
+V  [libjvm.so+0x814dbb]  G1PageBasedVirtualSpace::commit(unsigned long, unsigned long)+0x5b
+V  [libjvm.so+0x82b43b]  G1RegionsLargerThanCommitSizeMapper::commit_regions(unsigned int, unsigned long, WorkerThreads*)+0xab
+V  [libjvm.so+0x8bc16a]  HeapRegionManager::commit_regions(unsigned int, unsigned long, WorkerThreads*)+0x5a
+V  [libjvm.so+0x8bde0f]  HeapRegionManager::expand(unsigned int, unsigned int, WorkerThreads*)+0x2f
+V  [libjvm.so+0x8be025]  HeapRegionManager::expand_by(unsigned int, WorkerThreads*)+0x75
+V  [libjvm.so+0x7ca53c]  G1CollectedHeap::expand(unsigned long, WorkerThreads*, double*)+0xfc
+V  [libjvm.so+0x7caad3]  G1CollectedHeap::initialize()+0x543
+V  [libjvm.so+0xfbd6a9]  universe_init()+0xd9
+V  [libjvm.so+0x8dc2da]  init_globals()+0x3a
+V  [libjvm.so+0xf9c668]  Threads::create_vm(JavaVMInitArgs*, bool*)+0x278
+V  [libjvm.so+0x9b6863]  JNI_CreateJavaVM+0x53
+C  [libjli.so+0x4673]  JavaMain+0x93
+C  [libjli.so+0x846d]  ThreadJavaMain+0xd
+C  [libc.so.6+0x9caa4]
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x0000727dec34e120, length=0, elements={
+}
+
+Java Threads: ( => current thread )
+Total: 0
+
+Other Threads:
+  0x0000727de4058520 WorkerThread "GC Thread#0"                     [id=17593, stack(0x0000727dea629000,0x0000727dea729000) (1024K)]
+  0x0000727de4061af0 ConcurrentGCThread "G1 Main Marker"            [id=17594, stack(0x0000727de9100000,0x0000727de9200000) (1024K)]
+  0x0000727de4062aa0 WorkerThread "G1 Conc#0"                       [id=17595, stack(0x0000727de8fff000,0x0000727de90ff000) (1024K)]
+
+[error occurred during error reporting (printing all threads), id 0xb, SIGSEGV (0xb) at pc=0x0000727deb5e5904]
+VM state: not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x0000727dec327d98] Heap_lock - owner thread: 0x0000727de401c840
+
+Heap address: 0x00000000c0000000, size: 1024 MB, Compressed Oops mode: 32-bit
+
+CDS archive(s) mapped at: [0x0000000000000000-0x0000000000000000-0x0000000000000000), size 0, SharedBaseAddress: 0x0000000800000000, ArchiveRelocationMode: 1.
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 0, Narrow klass range: 0x0
+
+GC Precious Log:
+ CardTable entry size: 512
+ Card Set container configuration: InlinePtr #cards 5 size 8 Array Of Cards #cards 12 size 40 Howl #buckets 4 coarsen threshold 1843 Howl Bitmap #cards 512 size 80 coarsen threshold 460 Card regions per heap region 1 cards per card region 2048
+
+Heap:
+ garbage-first heap   total 0K, used 0K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 0 young (0K), 0 survivors (0K)
+
+[error occurred during error reporting (printing heap information), id 0xb, SIGSEGV (0xb) at pc=0x0000727debbae80e]
+GC Heap History (0 events):
+No events
+
+Dll operation events (1 events):
+Event: 0.003 Loaded shared library /usr/lib/jvm/java-21-openjdk-amd64/lib/libjava.so
+
+Deoptimization events (0 events):
+No events
+
+Classes loaded (0 events):
+No events
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+ZGC Phase Switch (0 events):
+No events
+
+VM Operations (0 events):
+No events
+
+Memory protections (1 events):
+Event: 0.003 Protecting memory [0x0000727dead00000,0x0000727dead04000] with protection modes 0
+
+Nmethod flushes (0 events):
+No events
+
+Events (0 events):
+No events
+
+
+Dynamic libraries:
+c0000000-100000000 ---p 00000000 00:00 0 
+571ee67cc000-571ee67cd000 r--p 00000000 ca:01 276253                     /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+571ee67cd000-571ee67ce000 r-xp 00001000 ca:01 276253                     /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+571ee67ce000-571ee67cf000 r--p 00002000 ca:01 276253                     /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+571ee67cf000-571ee67d0000 r--p 00002000 ca:01 276253                     /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+571ee67d0000-571ee67d1000 rw-p 00003000 ca:01 276253                     /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+571f087f2000-571f0883b000 rw-p 00000000 00:00 0                          [heap]
+727dbe000000-727dc0021000 rw-p 00000000 00:00 0 
+727dc0021000-727dc4000000 ---p 00000000 00:00 0 
+727dc4000000-727dc4021000 rw-p 00000000 00:00 0 
+727dc4021000-727dc8000000 ---p 00000000 00:00 0 
+727dc8000000-727dc8021000 rw-p 00000000 00:00 0 
+727dc8021000-727dcc000000 ---p 00000000 00:00 0 
+727dcc800000-727dcca70000 rwxp 00000000 00:00 0 
+727dcca70000-727dd3d38000 ---p 00000000 00:00 0 
+727dd3d38000-727dd3fa8000 rwxp 00000000 00:00 0 
+727dd3fa8000-727dd42c7000 ---p 00000000 00:00 0 
+727dd42c7000-727dd4537000 rwxp 00000000 00:00 0 
+727dd4537000-727ddb800000 ---p 00000000 00:00 0 
+727ddb800000-727de3e34000 r--s 00000000 ca:01 276403                     /usr/lib/jvm/java-21-openjdk-amd64/lib/modules
+727de4000000-727de4091000 rw-p 00000000 00:00 0 
+727de4091000-727de8000000 ---p 00000000 00:00 0 
+727de8a97000-727de8ffe000 rw-p 00000000 00:00 0 
+727de8ffe000-727de8fff000 ---p 00000000 00:00 0 
+727de8fff000-727de90ff000 rw-p 00000000 00:00 0 
+727de90ff000-727de9100000 ---p 00000000 00:00 0 
+727de9100000-727de9200000 rw-p 00000000 00:00 0 
+727de9200000-727dea600000 ---p 00000000 00:00 0 
+727dea628000-727dea629000 ---p 00000000 00:00 0 
+727dea629000-727dea729000 rw-p 00000000 00:00 0 
+727dea729000-727dea82f000 rw-p 00000000 00:00 0 
+727dea82f000-727dea915000 ---p 00000000 00:00 0 
+727dea915000-727dea91a000 rw-p 00000000 00:00 0 
+727dea91a000-727deaa00000 ---p 00000000 00:00 0 
+727deaa00000-727deaa9d000 r--p 00000000 ca:01 5171                       /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.33
+727deaa9d000-727deabe5000 r-xp 0009d000 ca:01 5171                       /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.33
+727deabe5000-727deac6c000 r--p 001e5000 ca:01 5171                       /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.33
+727deac6c000-727deac77000 r--p 0026b000 ca:01 5171                       /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.33
+727deac77000-727deac7a000 rw-p 00276000 ca:01 5171                       /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.33
+727deac7a000-727deac7e000 rw-p 00000000 00:00 0 
+727dead00000-727dead04000 ---p 00000000 00:00 0 
+727dead04000-727deae00000 rw-p 00000000 00:00 0 
+727deae00000-727deb0a2000 r--p 00000000 ca:01 276409                     /usr/lib/jvm/java-21-openjdk-amd64/lib/server/libjvm.so
+727deb0a2000-727debf18000 r-xp 002a2000 ca:01 276409                     /usr/lib/jvm/java-21-openjdk-amd64/lib/server/libjvm.so
+727debf18000-727dec1f2000 r--p 01118000 ca:01 276409                     /usr/lib/jvm/java-21-openjdk-amd64/lib/server/libjvm.so
+727dec1f2000-727dec2c6000 r--p 013f2000 ca:01 276409                     /usr/lib/jvm/java-21-openjdk-amd64/lib/server/libjvm.so
+727dec2c6000-727dec2f6000 rw-p 014c6000 ca:01 276409                     /usr/lib/jvm/java-21-openjdk-amd64/lib/server/libjvm.so
+727dec2f6000-727dec35c000 rw-p 00000000 00:00 0 
+727dec3b9000-727dec3dc000 rw-p 00000000 00:00 0 
+727dec3dc000-727dec3e9000 r--p 00000000 ca:01 276380                     /usr/lib/jvm/java-21-openjdk-amd64/lib/libjava.so
+727dec3e9000-727dec3f8000 r-xp 0000d000 ca:01 276380                     /usr/lib/jvm/java-21-openjdk-amd64/lib/libjava.so
+727dec3f8000-727dec3fd000 r--p 0001c000 ca:01 276380                     /usr/lib/jvm/java-21-openjdk-amd64/lib/libjava.so
+727dec3fd000-727dec3fe000 r--p 00021000 ca:01 276380                     /usr/lib/jvm/java-21-openjdk-amd64/lib/libjava.so
+727dec3fe000-727dec3ff000 rw-p 00022000 ca:01 276380                     /usr/lib/jvm/java-21-openjdk-amd64/lib/libjava.so
+727dec3ff000-727dec400000 rw-p 00000000 00:00 0 
+727dec400000-727dec428000 r--p 00000000 ca:01 6408                       /usr/lib/x86_64-linux-gnu/libc.so.6
+727dec428000-727dec5b0000 r-xp 00028000 ca:01 6408                       /usr/lib/x86_64-linux-gnu/libc.so.6
+727dec5b0000-727dec5ff000 r--p 001b0000 ca:01 6408                       /usr/lib/x86_64-linux-gnu/libc.so.6
+727dec5ff000-727dec603000 r--p 001fe000 ca:01 6408                       /usr/lib/x86_64-linux-gnu/libc.so.6
+727dec603000-727dec605000 rw-p 00202000 ca:01 6408                       /usr/lib/x86_64-linux-gnu/libc.so.6
+727dec605000-727dec612000 rw-p 00000000 00:00 0 
+727dec61e000-727dec623000 rw-p 00000000 00:00 0 
+727dec623000-727dec62a000 ---p 00000000 00:00 0 
+727dec62a000-727dec632000 rw-s 00000000 ca:01 277993                     /tmp/hsperfdata_root/17240
+727dec632000-727dec633000 ---p 00000000 00:00 0 
+727dec633000-727dec634000 r--p 00000000 00:00 0 
+727dec634000-727dec635000 ---p 00000000 00:00 0 
+727dec635000-727dec639000 r--p 00000000 ca:01 6388                       /usr/lib/x86_64-linux-gnu/libgcc_s.so.1
+727dec639000-727dec65d000 r-xp 00004000 ca:01 6388                       /usr/lib/x86_64-linux-gnu/libgcc_s.so.1
+727dec65d000-727dec661000 r--p 00028000 ca:01 6388                       /usr/lib/x86_64-linux-gnu/libgcc_s.so.1
+727dec661000-727dec662000 r--p 0002b000 ca:01 6388                       /usr/lib/x86_64-linux-gnu/libgcc_s.so.1
+727dec662000-727dec663000 rw-p 0002c000 ca:01 6388                       /usr/lib/x86_64-linux-gnu/libgcc_s.so.1
+727dec663000-727dec673000 r--p 00000000 ca:01 6411                       /usr/lib/x86_64-linux-gnu/libm.so.6
+727dec673000-727dec6f2000 r-xp 00010000 ca:01 6411                       /usr/lib/x86_64-linux-gnu/libm.so.6
+727dec6f2000-727dec74a000 r--p 0008f000 ca:01 6411                       /usr/lib/x86_64-linux-gnu/libm.so.6
+727dec74a000-727dec74b000 r--p 000e7000 ca:01 6411                       /usr/lib/x86_64-linux-gnu/libm.so.6
+727dec74b000-727dec74c000 rw-p 000e8000 ca:01 6411                       /usr/lib/x86_64-linux-gnu/libm.so.6
+727dec74c000-727dec74e000 rw-p 00000000 00:00 0 
+727dec74e000-727dec750000 r--p 00000000 ca:01 276384                     /usr/lib/jvm/java-21-openjdk-amd64/lib/libjli.so
+727dec750000-727dec75a000 r-xp 00002000 ca:01 276384                     /usr/lib/jvm/java-21-openjdk-amd64/lib/libjli.so
+727dec75a000-727dec75d000 r--p 0000c000 ca:01 276384                     /usr/lib/jvm/java-21-openjdk-amd64/lib/libjli.so
+727dec75d000-727dec75e000 r--p 0000f000 ca:01 276384                     /usr/lib/jvm/java-21-openjdk-amd64/lib/libjli.so
+727dec75e000-727dec75f000 rw-p 00010000 ca:01 276384                     /usr/lib/jvm/java-21-openjdk-amd64/lib/libjli.so
+727dec75f000-727dec761000 r--p 00000000 ca:01 5147                       /usr/lib/x86_64-linux-gnu/libz.so.1.3
+727dec761000-727dec773000 r-xp 00002000 ca:01 5147                       /usr/lib/x86_64-linux-gnu/libz.so.1.3
+727dec773000-727dec779000 r--p 00014000 ca:01 5147                       /usr/lib/x86_64-linux-gnu/libz.so.1.3
+727dec779000-727dec77a000 r--p 0001a000 ca:01 5147                       /usr/lib/x86_64-linux-gnu/libz.so.1.3
+727dec77a000-727dec77b000 rw-p 0001b000 ca:01 5147                       /usr/lib/x86_64-linux-gnu/libz.so.1.3
+727dec77b000-727dec77d000 r--p 00000000 ca:01 276383                     /usr/lib/jvm/java-21-openjdk-amd64/lib/libjimage.so
+727dec77d000-727dec780000 r-xp 00002000 ca:01 276383                     /usr/lib/jvm/java-21-openjdk-amd64/lib/libjimage.so
+727dec780000-727dec781000 r--p 00005000 ca:01 276383                     /usr/lib/jvm/java-21-openjdk-amd64/lib/libjimage.so
+727dec781000-727dec782000 r--p 00006000 ca:01 276383                     /usr/lib/jvm/java-21-openjdk-amd64/lib/libjimage.so
+727dec782000-727dec783000 rw-p 00007000 ca:01 276383                     /usr/lib/jvm/java-21-openjdk-amd64/lib/libjimage.so
+727dec783000-727dec785000 rw-p 00000000 00:00 0 
+727dec785000-727dec787000 r--p 00000000 00:00 0                          [vvar]
+727dec787000-727dec789000 r--p 00000000 00:00 0                          [vvar_vclock]
+727dec789000-727dec78b000 r-xp 00000000 00:00 0                          [vdso]
+727dec78b000-727dec78c000 r--p 00000000 ca:01 6405                       /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+727dec78c000-727dec7b7000 r-xp 00001000 ca:01 6405                       /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+727dec7b7000-727dec7c1000 r--p 0002c000 ca:01 6405                       /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+727dec7c1000-727dec7c3000 r--p 00036000 ca:01 6405                       /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+727dec7c3000-727dec7c5000 rw-p 00038000 ca:01 6405                       /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+7ffda2c4f000-7ffda2c72000 rw-p 00000000 00:00 0                          [stack]
+ffffffffff600000-ffffffffff601000 --xp 00000000 00:00 0                  [vsyscall]
+Total number of mappings: 104
+
+JVMTI agents: none
+
+
+VM Arguments:
+jvm_args: -Xmx1G -Xms1G -XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:InitiatingHeapOccupancyPercent=35 -XX:+ExplicitGCInvokesConcurrent -XX:MaxInlineLevel=15 -Djava.awt.headless=true -Xlog:gc*:file=/root/kafka_2.13-4.0.0/bin/../logs/kafkaServer-gc.log:time,tags:filecount=10,filesize=100M -Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dkafka.logs.dir=/root/kafka_2.13-4.0.0/bin/../logs -Dlog4j2.configurationFile=bin/../config/log4j2.yaml 
+java_command: kafka.Kafka config/server.properties
+java_class_path (initial): /root/kafka_2.13-4.0.0/bin/../libs/HdrHistogram-2.2.2.jar:/root/kafka_2.13-4.0.0/bin/../libs/activation-1.1.1.jar:/root/kafka_2.13-4.0.0/bin/../libs/aopalliance-repackaged-3.0.6.jar:/root/kafka_2.13-4.0.0/bin/../libs/argparse4j-0.7.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/caffeine-3.1.1.jar:/root/kafka_2.13-4.0.0/bin/../libs/classgraph-4.8.173.jar:/root/kafka_2.13-4.0.0/bin/../libs/commons-beanutils-1.9.4.jar:/root/kafka_2.13-4.0.0/bin/../libs/commons-collections-3.2.2.jar:/root/kafka_2.13-4.0.0/bin/../libs/commons-digester-2.1.jar:/root/kafka_2.13-4.0.0/bin/../libs/commons-lang3-3.12.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/commons-logging-1.3.2.jar:/root/kafka_2.13-4.0.0/bin/../libs/commons-validator-1.9.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/connect-api-4.0.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/connect-basic-auth-extension-4.0.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/connect-json-4.0.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/connect-mirror-4.0.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/connect-mirror-client-4.0.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/connect-runtime-4.0.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/connect-transforms-4.0.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/error_prone_annotations-2.14.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/hk2-api-3.0.6.jar:/root/kafka_2.13-4.0.0/bin/../libs/hk2-locator-3.0.6.jar:/root/kafka_2.13-4.0.0/bin/../libs/hk2-utils-3.0.6.jar:/root/kafka_2.13-4.0.0/bin/../libs/jackson-annotations-2.16.2.jar:/root/kafka_2.13-4.0.0/bin/../libs/jackson-core-2.16.2.jar:/root/kafka_2.13-4.0.0/bin/../libs/jackson-databind-2.16.2.jar:/root/kafka_2.13-4.0.0/bin/../libs/jackson-dataformat-csv-2.16.2.jar:/root/kafka_2.13-4.0.0/bin/../libs/jackson-dataformat-yaml-2.16.2.jar:/root/kafka_2.13-4.0.0/bin/../libs/jackson-datatype-jdk8-2.16.2.jar:/root/kafka_2.13-4.0.0/bin/../libs/jackson-jakarta-rs-base-2.16.2.jar:/root/kafka_2.13-4.0.0/bin/../libs/jackson-jakarta-rs-json-provider-2.16.2.jar:/root/kafka_2.13-4.0.0/bin/../libs/jackson-module-blackbird-2.16.2.jar:/root/kafka_2.13-4.0.0/bin/../libs/jackson-module-jakarta-xmlbind-annotations-2.16.2.jar:/root/kafka_2.13-4.0.0/bin/../libs/jakarta.activation-2.0.1.jar:/root/kafka_2.13-4.0.0/bin/../libs/jakarta.activation-api-2.1.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/jakarta.annotation-api-2.1.1.jar:/root/kafka_2.13-4.0.0/bin/../libs/jakarta.inject-api-2.0.1.jar:/root/kafka_2.13-4.0.0/bin/../libs/jakarta.servlet-api-6.0.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/jakarta.validation-api-3.0.2.jar:/root/kafka_2.13-4.0.0/bin/../libs/jakarta.ws.rs-api-3.1.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/jakarta.xml.bind-api-3.0.1.jar:/root/kafka_2.13-4.0.0/bin/../libs/javassist-3.29.2-GA.jar:/root/kafka_2.13-4.0.0/bin/../libs/javax.activation-api-1.2.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/javax.annotation-api-1.3.2.jar:/root/kafka_2.13-4.0.0/bin/../libs/jaxb-api-2.3.1.jar:/root/kafka_2.13-4.0.0/bin/../libs/jersey-client-3.1.9.jar:/root/kafka_2.13-4.0.0/bin/../libs/jersey-common-3.1.9.jar:/root/kafka_2.13-4.0.0/bin/../libs/jersey-container-servlet-3.1.9.jar:/root/kafka_2.13-4.0.0/bin/../libs/jersey-container-servlet-core-3.1.9.jar:/root/kafka_2.13-4.0.0/bin/../libs/jersey-hk2-3.1.9.jar:/root/kafka_2.13-4.0.0/bin/../libs/jersey-server-3.1.9.jar:/root/kafka_2.13-4.0.0/bin/../libs/jetty-alpn-client-12.0.15.jar:/root/kafka_2.13-4.0.0/bin/../libs/jetty-client-12.0.15.jar:/root/kafka_2.13-4.0.0/bin/../libs/jetty-ee10-servlet-12.0.15.jar:/root/kafka_2.13-4.0.0/bin/../libs/jetty-ee10-servlets-12.0.15.jar:/root/kafka_2.13-4.0.0/bin/../libs/jetty-http-12.0.15.jar:/root/kafka_2.13-4.0.0/bin/../libs/jetty-io-12.0.15.jar:/root/kafka_2.13-4.0.0/bin/../libs/jetty-security-12.0.15.jar:/root/kafka_2.13-4.0.0/bin/../libs/jetty-server-12.0.15.jar:/root/kafka_2.13-4.0.0/bin/../libs/jetty-session-12.0.15.jar:/root/kafka_2.13-4.0.0/bin/../libs/jetty-util-12.0.15.jar:/root/kafka_2.13-4.0.0/bin/../libs/jline-3.25.1.jar:/root/kafka_2.13-4.0.0/bin/../libs/jopt-simple-5.0.4.jar:/root/kafka_2.13-4.0.0/bin/../libs/jose4j-0.9.4.jar:/root/kafka_2.13-4.0.0/bin/../libs/kafka-clients-4.0.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/kafka-coordinator-common-4.0.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/kafka-group-coordinator-4.0.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/kafka-group-coordinator-api-4.0.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/kafka-metadata-4.0.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/kafka-raft-4.0.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/kafka-server-4.0.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/kafka-server-common-4.0.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/kafka-share-coordinator-4.0.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/kafka-shell-4.0.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/kafka-storage-4.0.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/kafka-storage-api-4.0.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/kafka-streams-4.0.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/kafka-streams-examples-4.0.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/kafka-streams-scala_2.13-4.0.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/kafka-streams-test-utils-4.0.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/kafka-tools-4.0.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/kafka-tools-api-4.0.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/kafka-transaction-coordinator-4.0.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/kafka_2.13-4.0.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/log4j-1.2-api-2.24.3.jar:/root/kafka_2.13-4.0.0/bin/../libs/log4j-api-2.24.3.jar:/root/kafka_2.13-4.0.0/bin/../libs/log4j-core-2.24.3.jar:/root/kafka_2.13-4.0.0/bin/../libs/log4j-slf4j-impl-2.24.3.jar:/root/kafka_2.13-4.0.0/bin/../libs/lz4-java-1.8.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/maven-artifact-3.9.6.jar:/root/kafka_2.13-4.0.0/bin/../libs/metrics-core-2.2.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/opentelemetry-proto-1.0.0-alpha.jar:/root/kafka_2.13-4.0.0/bin/../libs/osgi-resource-locator-1.0.3.jar:/root/kafka_2.13-4.0.0/bin/../libs/pcollections-4.0.1.jar:/root/kafka_2.13-4.0.0/bin/../libs/plexus-utils-3.5.1.jar:/root/kafka_2.13-4.0.0/bin/../libs/protobuf-java-3.25.5.jar:/root/kafka_2.13-4.0.0/bin/../libs/re2j-1.7.jar:/root/kafka_2.13-4.0.0/bin/../libs/rocksdbjni-9.7.3.jar:/root/kafka_2.13-4.0.0/bin/../libs/scala-library-2.13.15.jar:/root/kafka_2.13-4.0.0/bin/../libs/scala-logging_2.13-3.9.5.jar:/root/kafka_2.13-4.0.0/bin/../libs/scala-reflect-2.13.15.jar:/root/kafka_2.13-4.0.0/bin/../libs/slf4j-api-1.7.36.jar:/root/kafka_2.13-4.0.0/bin/../libs/snakeyaml-2.2.jar:/root/kafka_2.13-4.0.0/bin/../libs/snappy-java-1.1.10.5.jar:/root/kafka_2.13-4.0.0/bin/../libs/swagger-annotations-2.2.25.jar:/root/kafka_2.13-4.0.0/bin/../libs/trogdor-4.0.0.jar:/root/kafka_2.13-4.0.0/bin/../libs/zstd-jni-1.5.6-6.jar
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 2                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 1                                         {product} {ergonomic}
+     bool ExplicitGCInvokesConcurrent              = true                                      {product} {command line}
+     uint G1ConcRefinementThreads                  = 1                                         {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 1048576                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 1073741824                                {product} {command line}
+    uintx InitiatingHeapOccupancyPercent           = 35                                        {product} {command line}
+     bool ManagementServer                         = true                                      {product} {command line}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+    uintx MaxGCPauseMillis                         = 20                                        {product} {command line}
+   size_t MaxHeapSize                              = 1073741824                                {product} {command line}
+     intx MaxInlineLevel                           = 15                                     {C2 product} {command line}
+   size_t MinHeapDeltaBytes                        = 1048576                                   {product} {ergonomic}
+   size_t MinHeapSize                              = 1073741824                                {product} {command line}
+    uintx NonNMethodCodeHeapSize                   = 5826188                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122916026                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122916026                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+   size_t SoftMaxHeapSize                          = 1073741824                             {manageable} {ergonomic}
+     bool UseCompressedOops                        = true                           {product lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {command line}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags foldmultilines=false
+ #1: stderr all=off uptime,level,tags foldmultilines=false
+ #2: file=/root/kafka_2.13-4.0.0/bin/../logs/kafkaServer-gc.log all=off,gc*=info time,tags foldmultilines=false,filecount=10,filesize=100M,async=false (reconfigured)
+
+Release file:
+<release file has not been read>
+Environment Variables:
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+SHELL=/bin/bash
+LANG=C.UTF-8
+TERM=xterm-256color
+
+Active Locale:
+LC_ALL=C
+LC_COLLATE=C
+LC_CTYPE=C
+LC_MESSAGES=C
+LC_MONETARY=C
+LC_NUMERIC=C
+LC_TIME=C
+
+Signal Handlers:
+   SIGSEGV: crash_handler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, unblocked
+    SIGBUS: crash_handler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, unblocked
+    SIGFPE: crash_handler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, unblocked
+   SIGPIPE: javaSignalHandler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, blocked
+   SIGXFSZ: javaSignalHandler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, blocked
+    SIGILL: crash_handler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, unblocked
+   SIGUSR2: SR_handler in libjvm.so, mask=00000000000000000000000000000000, flags=SA_RESTART|SA_SIGINFO, blocked
+    SIGHUP: SIG_DFL, mask=00000000000000000000000000000000, flags=none, blocked
+    SIGINT: SIG_DFL, mask=00000000000000000000000000000000, flags=none, blocked
+   SIGTERM: SIG_DFL, mask=00000000000000000000000000000000, flags=none, blocked
+   SIGQUIT: UserHandler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, blocked
+   SIGTRAP: crash_handler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, unblocked
+
+
+Periodic native trim disabled
+
+---------------  S Y S T E M  ---------------
+
+OS:
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=24.04
+DISTRIB_CODENAME=noble
+DISTRIB_DESCRIPTION="Ubuntu 24.04.3 LTS"
+uname: Linux 6.14.0-1015-aws #15~24.04.1-Ubuntu SMP Tue Sep 23 22:44:48 UTC 2025 x86_64
+OS uptime: 1 days 14:06 hours
+libc: glibc 2.39 NPTL 2.39 
+rlimit (soft/hard): STACK 8192k/infinity , CORE 0k/infinity , NPROC 3739/3739 , NOFILE 1048576/1048576 , AS infinity/infinity , CPU infinity/infinity , DATA infinity/infinity , FSIZE infinity/infinity , MEMLOCK 122536k/122536k
+load average: 0.00 0.00 0.00
+
+/proc/meminfo:
+MemTotal:         980304 kB
+MemFree:          187172 kB
+MemAvailable:     599900 kB
+Buffers:           24360 kB
+Cached:           521492 kB
+SwapCached:            0 kB
+Active:           189220 kB
+Inactive:         443968 kB
+Active(anon):      52832 kB
+Inactive(anon):    57136 kB
+Active(file):     136388 kB
+Inactive(file):   386832 kB
+Unevictable:       40248 kB
+Mlocked:           27284 kB
+SwapTotal:             0 kB
+SwapFree:              0 kB
+Zswap:                 0 kB
+Zswapped:              0 kB
+Dirty:               156 kB
+Writeback:             0 kB
+AnonPages:        127616 kB
+Mapped:            75260 kB
+Shmem:               908 kB
+KReclaimable:      34576 kB
+Slab:              81856 kB
+SReclaimable:      34576 kB
+SUnreclaim:        47280 kB
+KernelStack:        3024 kB
+PageTables:         4120 kB
+SecPageTables:         0 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:      490152 kB
+Committed_AS:     775668 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:        9140 kB
+VmallocChunk:          0 kB
+Percpu:             8512 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:         0 kB
+ShmemHugePages:        0 kB
+ShmemPmdMapped:        0 kB
+FileHugePages:         0 kB
+FilePmdMapped:         0 kB
+Unaccepted:            0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+Hugetlb:               0 kB
+DirectMap4k:       63488 kB
+DirectMap2M:      985088 kB
+
+/sys/kernel/mm/transparent_hugepage/enabled: always [madvise] never
+/sys/kernel/mm/transparent_hugepage/hpage_pmd_size: 2097152
+/sys/kernel/mm/transparent_hugepage/defrag (defrag/compaction efforts parameter): always defer defer+madvise [madvise] never
+
+Process Memory:
+Virtual Size: 1788672K (peak: 1788672K)
+Resident Set Size: 21400K (peak: 21400K) (anon: 6784K, file: 14616K, shmem: 0K)
+Swapped out: 0K
+C-Heap outstanding allocations: 7253K, retained: 590K
+glibc malloc tunables: (default)
+
+/proc/sys/kernel/threads-max (system-wide limit on the number of threads): 7478
+/proc/sys/vm/max_map_count (maximum number of memory map areas a process may have): 1048576
+/proc/sys/vm/swappiness (control to define how aggressively the kernel swaps out anonymous memory): 60
+/proc/sys/kernel/pid_max (system-wide limit on number of process identifiers): 4194304
+
+container information not found.
+Xen hardware-assisted virtualization detected
+Steal ticks since vm start: 0
+Steal ticks percentage since vm start:  0.000
+
+CPU: total 15 (initial active 1) (1 cores per cpu, 1 threads per core) family 6 model 79 stepping 1 microcode 0xd000404, cx8, cmov, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, lzcnt, tsc, avx, avx2, aes, erms, clmul, bmi1, bmi2, fma, vzeroupper, clflush, hv, rdtscp, f16c
+CPU Model and flags from /proc/cpuinfo:
+model name	: Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx rdtscp lm constant_tsc rep_good nopl xtopology cpuid tsc_known_freq pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm pti fsgsbase bmi1 avx2 smep bmi2 erms invpcid xsaveopt
+
+Online cpus: 0
+Offline cpus: 1-14
+BIOS frequency limitation: <Not Available>
+Frequency switch latency (ns): <Not Available>
+Available cpu frequencies: <Not Available>
+Current governor: <Not Available>
+Core performance/turbo boost: <Not Available>
+
+Memory: 4k page, physical 980304k(599900k free), swap 0k(0k free)
+Page Sizes: 4k
+
+vm_info: OpenJDK 64-Bit Server VM (21.0.9+10-Ubuntu-124.04) for linux-amd64 JRE (21.0.9+10-Ubuntu-124.04), built on 2025-10-23T12:36:23Z by "buildd" with gcc 13.3.0
+
+END.

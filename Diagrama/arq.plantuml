@@ -1,0 +1,64 @@
+@startuml
+skinparam componentStyle rectangle
+skinparam shadowing false
+skinparam fontsize 12
+
+title Arquitetura Garrafa Inteligente - Fluxo de Dados
+
+rectangle "Raspberry Pi (Dispositivo Físico)" as RPi {
+  component "Water Device\nScript Python\n(sensor + lógica de volume)" as PiService
+  artifact "Sensor DS18B20\n(temperatura da água)" as DS18B20
+  component "LEDs\nVerde/Amarelo/Vermelho" as LEDs
+}
+
+node "AWS EC2" as EC2 {
+  component "Kafka Broker\n(topic: water_bottle.sensors)" as Kafka
+  database "InfluxDB\nbucket: GarrafaInteligente\nmeasurement: water_bottle_state" as Influx
+  database "PostgreSQL\nDB: garrafa_db\nTabela: water_bottle_state" as Postgres
+
+  component "kafka_to_influx.py\nConsumer Kafka\n→ Influx + Postgres" as K2I
+  component "FastAPI\napi_server.py\n(/status, /historico, /resumo-dia)" as API
+}
+
+actor "App Android\n(usuário idoso)" as App
+
+' Relações no Raspberry
+PiService --> DS18B20 : lê temperatura\n(água)
+PiService --> LEDs : atualiza cor\n(verde/amarelo/vermelho)\nconforme volume%
+
+' Raspberry → Kafka
+PiService --> Kafka : envia JSON periódico\n(bottleId, temperature_c,\nvolumeMl, capacityMl,\ntimestamp, etc.)
+
+' Kafka → Influx/Postgres
+Kafka --> K2I : entrega mensagens\nwater_bottle.sensors
+K2I --> Influx : grava dados\nsérie temporal\n(temperature_c, volume_ml,\ncapacity_ml, ...)
+K2I --> Postgres : grava histórico relacional\n(tabela water_bottle_state)
+
+' API → Influx
+App --> API : HTTP GET\n/api/garrafas/{id}/status\n/api/garrafas/{id}/historico\n/api/garrafas/{id}/resumo-dia?meta_ml=...
+API --> Influx : consulta estado atual\n e histórico da garrafa
+
+' (Opcional) uso do Postgres futuro
+API ..> Postgres : (futuro)\nconsultas analíticas\nou relatórios
+
+legend bottom
+  Raspberry Pi:
+    - Lê sensor DS18B20
+    - Simula volume da garrafa
+    - Atualiza LEDs conforme % volume
+    - Envia JSON para Kafka (water_bottle.sensors)
+
+  EC2:
+    - Kafka recebe mensagens do dispositivo
+    - kafka_to_influx.py consome:
+        → grava série temporal no InfluxDB
+        → grava histórico relacional no PostgreSQL
+    - FastAPI lê InfluxDB e expõe:
+        /status, /historico, /resumo-dia
+
+  App Android:
+    - Consome apenas a API HTTP
+    - Não fala direto com Kafka nem com o Raspberry
+endlegend
+
+@enduml

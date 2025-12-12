@@ -1,0 +1,5 @@
+[2025-11-30 21:20:22,403] INFO [Broker id=1] Transitioning 3 partition(s) to local followers. (state.change.logger)
+[2025-11-30 21:20:22,406] INFO [Broker id=1] Follower lightlevel-0 starts at leader epoch 3 from offset 819 with partition epoch 3 and high watermark 819. Current leader is -1. Previous leader Some(-1) and previous leader epoch was 3. (state.change.logger)
+[2025-11-30 21:20:22,412] INFO [Broker id=1] Follower temperature-0 starts at leader epoch 3 from offset 79 with partition epoch 3 and high watermark 79. Current leader is -1. Previous leader Some(-1) and previous leader epoch was 3. (state.change.logger)
+[2025-11-30 21:20:22,412] INFO [Broker id=1] Follower ledcommand-0 starts at leader epoch 3 from offset 29 with partition epoch 3 and high watermark 29. Current leader is -1. Previous leader Some(-1) and previous leader epoch was 3. (state.change.logger)
+[2025-11-30 21:20:22,514] INFO [Broker id=1] Stopped fetchers as part of controlled shutdown for 3 partitions (state.change.logger)

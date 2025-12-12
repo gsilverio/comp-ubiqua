@@ -1,0 +1,35 @@
+[2025-12-04 22:38:06,725] INFO [SnapshotGenerator id=1] Creating new KRaft snapshot file snapshot 00000000000000064923-0000000002 because we have waited at least 60 minute(s). (org.apache.kafka.image.publisher.SnapshotGenerator)
+[2025-12-04 22:38:06,735] INFO [SnapshotEmitter id=1] Successfully wrote snapshot 00000000000000064923-0000000002 (org.apache.kafka.image.publisher.SnapshotEmitter)
+[2025-12-04 22:38:49,341] WARN [SocketServer listenerType=CONTROLLER, nodeId=1] Unexpected error from /45.33.109.8 (channelId=172.31.25.59:9093-45.33.109.8:46789-1-1); closing connection (org.apache.kafka.common.network.Selector)
+org.apache.kafka.common.network.InvalidReceiveException: Invalid receive (size = 1195725856 larger than 104857600)
+	at org.apache.kafka.common.network.NetworkReceive.readFrom(NetworkReceive.java:95) ~[kafka-clients-4.0.0.jar:?]
+	at org.apache.kafka.common.network.KafkaChannel.receive(KafkaChannel.java:462) ~[kafka-clients-4.0.0.jar:?]
+	at org.apache.kafka.common.network.KafkaChannel.read(KafkaChannel.java:412) ~[kafka-clients-4.0.0.jar:?]
+	at org.apache.kafka.common.network.Selector.attemptRead(Selector.java:679) ~[kafka-clients-4.0.0.jar:?]
+	at org.apache.kafka.common.network.Selector.pollSelectionKeys(Selector.java:581) ~[kafka-clients-4.0.0.jar:?]
+	at org.apache.kafka.common.network.Selector.poll(Selector.java:486) ~[kafka-clients-4.0.0.jar:?]
+	at kafka.network.Processor.poll(SocketServer.scala:1017) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.network.Processor.run(SocketServer.scala:921) ~[kafka_2.13-4.0.0.jar:?]
+	at java.base/java.lang.Thread.run(Thread.java:1583) [?:?]
+[2025-12-04 22:38:49,683] WARN [SocketServer listenerType=CONTROLLER, nodeId=1] Unexpected error from /45.33.109.8 (channelId=172.31.25.59:9093-45.33.109.8:46790-2-1); closing connection (org.apache.kafka.common.network.Selector)
+org.apache.kafka.common.network.InvalidReceiveException: Invalid receive (size = 369295616 larger than 104857600)
+	at org.apache.kafka.common.network.NetworkReceive.readFrom(NetworkReceive.java:95) ~[kafka-clients-4.0.0.jar:?]
+	at org.apache.kafka.common.network.KafkaChannel.receive(KafkaChannel.java:462) ~[kafka-clients-4.0.0.jar:?]
+	at org.apache.kafka.common.network.KafkaChannel.read(KafkaChannel.java:412) ~[kafka-clients-4.0.0.jar:?]
+	at org.apache.kafka.common.network.Selector.attemptRead(Selector.java:679) ~[kafka-clients-4.0.0.jar:?]
+	at org.apache.kafka.common.network.Selector.pollSelectionKeys(Selector.java:581) ~[kafka-clients-4.0.0.jar:?]
+	at org.apache.kafka.common.network.Selector.poll(Selector.java:486) ~[kafka-clients-4.0.0.jar:?]
+	at kafka.network.Processor.poll(SocketServer.scala:1017) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.network.Processor.run(SocketServer.scala:921) ~[kafka_2.13-4.0.0.jar:?]
+	at java.base/java.lang.Thread.run(Thread.java:1583) [?:?]
+[2025-12-04 22:39:50,440] WARN [SocketServer listenerType=CONTROLLER, nodeId=1] Unexpected error from /45.33.109.8 (channelId=172.31.25.59:9093-45.33.109.8:46794-1-3); closing connection (org.apache.kafka.common.network.Selector)
+org.apache.kafka.common.network.InvalidReceiveException: Invalid receive (size = 707857674 larger than 104857600)
+	at org.apache.kafka.common.network.NetworkReceive.readFrom(NetworkReceive.java:95) ~[kafka-clients-4.0.0.jar:?]
+	at org.apache.kafka.common.network.KafkaChannel.receive(KafkaChannel.java:462) ~[kafka-clients-4.0.0.jar:?]
+	at org.apache.kafka.common.network.KafkaChannel.read(KafkaChannel.java:412) ~[kafka-clients-4.0.0.jar:?]
+	at org.apache.kafka.common.network.Selector.attemptRead(Selector.java:679) ~[kafka-clients-4.0.0.jar:?]
+	at org.apache.kafka.common.network.Selector.pollSelectionKeys(Selector.java:581) ~[kafka-clients-4.0.0.jar:?]
+	at org.apache.kafka.common.network.Selector.poll(Selector.java:486) ~[kafka-clients-4.0.0.jar:?]
+	at kafka.network.Processor.poll(SocketServer.scala:1017) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.network.Processor.run(SocketServer.scala:921) ~[kafka_2.13-4.0.0.jar:?]
+	at java.base/java.lang.Thread.run(Thread.java:1583) [?:?]

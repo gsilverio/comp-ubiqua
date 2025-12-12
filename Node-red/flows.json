@@ -1,0 +1,221 @@
+[
+    {
+        "id": "flow1",
+        "type": "tab",
+        "label": "Garrafa Analysis Flow",
+        "disabled": false,
+        "info": "Análise de streams de dados de garrafa - dados atuais vs histórico"
+    },
+    {
+        "id": "inject_current",
+        "type": "inject",
+        "z": "flow1",
+        "name": "Poll Current Status",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 80,
+        "wires": [
+            [
+                "http_current"
+            ]
+        ]
+    },
+    {
+        "id": "http_current",
+        "type": "http request",
+        "z": "flow1",
+        "name": "Get Current Status",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://13.217.153.230:8000/api/garrafas/garrafa-1/status",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 360,
+        "y": 80,
+        "wires": [
+            [
+                "process_current"
+            ]
+        ]
+    },
+    {
+        "id": "process_current",
+        "type": "function",
+        "z": "flow1",
+        "name": "Process Current Data",
+        "func": "// Store current data in flow context\nconst current = msg.payload;\nflow.set('currentData', current);\n\n// Pass to analysis\nmsg.current = current;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 80,
+        "wires": [
+            [
+                "trigger_historical"
+            ]
+        ]
+    },
+    {
+        "id": "trigger_historical",
+        "type": "change",
+        "z": "flow1",
+        "name": "Trigger Historical",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 140,
+        "y": 180,
+        "wires": [
+            [
+                "http_historical"
+            ]
+        ]
+    },
+    {
+        "id": "http_historical",
+        "type": "http request",
+        "z": "flow1",
+        "name": "Get Historical Data (24h)",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://13.217.153.230:8000/api/garrafas/garrafa-1/historico?horas=24",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 390,
+        "y": 180,
+        "wires": [
+            [
+                "analyze_data"
+            ]
+        ]
+    },
+    {
+        "id": "analyze_data",
+        "type": "function",
+        "z": "flow1",
+        "name": "Analyze Current vs Historical",
+        "func": "const current = flow.get('currentData');\nconst historical = msg.payload;\n\nif (!current || !historical || historical.length === 0) {\n    return null;\n}\n\n// Calculate historical averages\nlet tempSum = 0;\nlet volumeSum = 0;\nlet percentSum = 0;\nconst count = historical.length;\n\nhistorical.forEach(record => {\n    tempSum += record.temperature_c;\n    volumeSum += record.volume_ml;\n    percentSum += record.percent_full;\n});\n\nconst avgTemp = tempSum / count;\nconst avgVolume = volumeSum / count;\nconst avgPercent = percentSum / count;\n\n// Calculate deviations\nconst tempDeviation = current.temperature_c - avgTemp;\nconst volumeDeviation = current.volume_ml - avgVolume;\nconst percentDeviation = current.percent_full - avgPercent;\n\n// Determine bottle state\nlet bottleState = 'normal';\nlet alerts = [];\n\nif (current.percent_full === 0) {\n    bottleState = 'empty';\n    alerts.push('Bottle is empty');\n} else if (current.percent_full === 1) {\n    bottleState = 'full';\n    alerts.push('Bottle is full');\n} else if (current.percent_full < 0.2) {\n    bottleState = 'low';\n    alerts.push('Low water level (< 20%)');\n}\n\nif (Math.abs(tempDeviation) > 2) {\n    alerts.push(`Temperature deviation: ${tempDeviation.toFixed(2)}°C from average`);\n}\n\nif (volumeDeviation < -100) {\n    alerts.push('Significant volume decrease detected');\n}\n\n// Create event object\nconst event = {\n    timestamp: new Date().toISOString(),\n    bottleId: current.bottleId,\n    current: {\n        temperature_c: current.temperature_c,\n        volume_ml: current.volume_ml,\n        percent_full: current.percent_full,\n        time: current.time\n    },\n    historical_avg: {\n        temperature_c: avgTemp,\n        volume_ml: avgVolume,\n        percent_full: avgPercent\n    },\n    deviations: {\n        temperature_c: tempDeviation,\n        volume_ml: volumeDeviation,\n        percent_full: percentDeviation\n    },\n    state: bottleState,\n    alerts: alerts,\n    historical_records_count: count\n};\n\nmsg.payload = event;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 180,
+        "wires": [
+            [
+                "influx_write"
+            ]
+        ]
+    },
+    {
+        "id": "debug_event",
+        "type": "debug",
+        "z": "flow1",
+        "name": "Event Debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 910,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "influx_write",
+        "type": "function",
+        "z": "flow1",
+        "name": "Format for InfluxDB",
+        "func": "const event = msg.payload;\n\n// Create InfluxDB line protocol format\nconst measurement = 'garrafa_events';\nconst tags = `bottleId=${event.bottleId},state=${event.state}`;\nconst fields = [\n    `current_temp=${event.current.temperature_c}`,\n    `current_volume=${event.current.volume_ml}`,\n    `current_percent=${event.current.percent_full}`,\n    `avg_temp=${event.historical_avg.temperature_c}`,\n    `avg_volume=${event.historical_avg.volume_ml}`,\n    `avg_percent=${event.historical_avg.percent_full}`,\n    `temp_deviation=${event.deviations.temperature_c}`,\n    `volume_deviation=${event.deviations.volume_ml}`,\n    `percent_deviation=${event.deviations.percent_full}`,\n    `alert_count=${event.alerts.length}`,\n    `alerts=\"${event.alerts.join('; ')}\"`\n].join(',');\n\nconst timestamp = new Date(event.timestamp).getTime() * 1000000; // nanoseconds\n\nmsg.payload = [\n    {\n        measurement: measurement,\n        tags: {\n            bottleId: event.bottleId,\n            state: event.state\n        },\n        \n            current_temp: event.current.temperature_c,\n            current_volume: event.current.volume_ml,\n            current_percent: event.current.percent_full,\n            avg_temp: event.historical_avg.temperature_c,\n            avg_volume: event.historical_avg.volume_ml,\n            avg_percent: event.historical_avg.percent_full,\n            temp_deviation: event.deviations.temperature_c,\n            volume_deviation: event.deviations.volume_ml,\n            percent_deviation: event.deviations.percent_full,\n            alert_count: event.alerts.length,\n            alerts: event.alerts.join('; ')\n    ,\n        timestamp: timestamp\n    }\n];\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 930,
+        "y": 220,
+        "wires": [
+            [
+                "influxdb_out",
+                "debug_event"
+            ]
+        ]
+    },
+    {
+        "id": "influxdb_out",
+        "type": "influxdb out",
+        "z": "flow1",
+        "influxdb": "influx_config",
+        "name": "Write to InfluxDB",
+        "measurement": "garrafa_events",
+        "precision": "ns",
+        "retentionPolicy": "",
+        "database": "garrafa_db",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "UFGInf2025",
+        "bucket": "garrafa-inteligente",
+        "x": 1150,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "influx_config",
+        "type": "influxdb",
+        "hostname": "localhost",
+        "port": "8086",
+        "protocol": "http",
+        "database": "garrafa_db",
+        "name": "Local InfluxDB",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://influxdb:8086",
+        "timeout": "",
+        "rejectUnauthorized": false
+    },
+    {
+        "id": "4cba7b251153402c",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-influxdb": "0.7.0"
+        }
+    }
+]

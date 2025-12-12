@@ -1,0 +1,194 @@
+[2025-11-30 20:17:27,126] INFO Registered kafka:type=kafka.Log4jController MBean (kafka.utils.Log4jControllerRegistration$)
+[2025-11-30 20:17:28,240] INFO Registered signal handlers for TERM, INT, HUP (org.apache.kafka.common.utils.LoggingSignalHandler)
+[2025-11-30 20:17:28,246] INFO [ControllerServer id=1] Starting controller (kafka.server.ControllerServer)
+[2025-11-30 20:17:29,141] INFO Updated connection-accept-rate max connection creation rate to 2147483647 (kafka.network.ConnectionQuotas)
+[2025-11-30 20:17:29,256] INFO [SocketServer listenerType=CONTROLLER, nodeId=1] Created data-plane acceptor and processors for endpoint : ListenerName(CONTROLLER) (kafka.network.SocketServer)
+[2025-11-30 20:17:29,278] INFO authorizerStart completed for endpoint CONTROLLER. Endpoint is now READY. (org.apache.kafka.server.network.EndpointReadyFutures)
+[2025-11-30 20:17:29,282] INFO [SharedServer id=1] Starting SharedServer (kafka.server.SharedServer)
+[2025-11-30 20:17:29,417] INFO [LogLoader partition=__cluster_metadata-0, dir=/tmp/kraft-combined-logs] Recovering unflushed segment 0. 0 recovered for __cluster_metadata-0. (org.apache.kafka.storage.internals.log.LogLoader)
+[2025-11-30 20:17:29,448] INFO [LogLoader partition=__cluster_metadata-0, dir=/tmp/kraft-combined-logs] Loading producer state till offset 0 (org.apache.kafka.storage.internals.log.UnifiedLog)
+[2025-11-30 20:17:29,450] INFO [LogLoader partition=__cluster_metadata-0, dir=/tmp/kraft-combined-logs] Reloading from producer snapshot and rebuilding producer state from offset 0 (org.apache.kafka.storage.internals.log.UnifiedLog)
+[2025-11-30 20:17:29,452] INFO Deleted producer state snapshot /tmp/kraft-combined-logs/__cluster_metadata-0/00000000000000000129.snapshot (org.apache.kafka.storage.internals.log.SnapshotFile)
+[2025-11-30 20:17:29,463] INFO [LogLoader partition=__cluster_metadata-0, dir=/tmp/kraft-combined-logs] Producer state recovery took 2ms for snapshot load and 0ms for segment recovery from offset 0 (org.apache.kafka.storage.internals.log.UnifiedLog)
+[2025-11-30 20:17:29,716] INFO [ProducerStateManager partition=__cluster_metadata-0] Wrote producer snapshot at offset 9865 with 0 producer ids in 19 ms. (org.apache.kafka.storage.internals.log.ProducerStateManager)
+[2025-11-30 20:17:29,739] INFO [LogLoader partition=__cluster_metadata-0, dir=/tmp/kraft-combined-logs] Loading producer state till offset 9865 (org.apache.kafka.storage.internals.log.UnifiedLog)
+[2025-11-30 20:17:29,740] INFO [LogLoader partition=__cluster_metadata-0, dir=/tmp/kraft-combined-logs] Reloading from producer snapshot and rebuilding producer state from offset 9865 (org.apache.kafka.storage.internals.log.UnifiedLog)
+[2025-11-30 20:17:29,746] INFO [ProducerStateManager partition=__cluster_metadata-0] Loading producer state from snapshot file 'SnapshotFile(offset=9865, file=/tmp/kraft-combined-logs/__cluster_metadata-0/00000000000000009865.snapshot)' (org.apache.kafka.storage.internals.log.ProducerStateManager)
+[2025-11-30 20:17:29,751] INFO [LogLoader partition=__cluster_metadata-0, dir=/tmp/kraft-combined-logs] Producer state recovery took 11ms for snapshot load and 0ms for segment recovery from offset 9865 (org.apache.kafka.storage.internals.log.UnifiedLog)
+[2025-11-30 20:17:29,838] INFO Initialized snapshots with IDs SortedSet(OffsetAndEpoch(offset=0, epoch=0), OffsetAndEpoch(offset=7339, epoch=2)) from /tmp/kraft-combined-logs/__cluster_metadata-0 (kafka.raft.KafkaMetadataLog$)
+[2025-11-30 20:17:29,891] INFO [raft-expiration-reaper]: Starting (kafka.raft.TimingWheelExpirationService$ExpiredOperationReaper)
+[2025-11-30 20:17:29,910] INFO [RaftManager id=1] Starting request manager with bootstrap servers: [localhost:9093 (id: -2 rack: null isFenced: false)] (org.apache.kafka.raft.KafkaRaftClient)
+[2025-11-30 20:17:29,923] INFO [RaftManager id=1] Reading KRaft snapshot and log as part of the initialization (org.apache.kafka.raft.KafkaRaftClient)
+[2025-11-30 20:17:29,925] INFO [RaftManager id=1] Loading snapshot (OffsetAndEpoch(offset=7339, epoch=2)) since log start offset (0) is greater than the internal listener's next offset (-1) (org.apache.kafka.raft.internals.KRaftControlRecordStateMachine)
+[2025-11-30 20:17:29,954] INFO [RaftManager id=1] Latest kraft.version is KRAFT_VERSION_1 at offset 7338 (org.apache.kafka.raft.internals.KRaftControlRecordStateMachine)
+[2025-11-30 20:17:29,957] INFO [RaftManager id=1] Latest set of voters is VoterSet(voters={1=VoterNode(voterKey=ReplicaKey(id=1, directoryId=WPDxH6ZlSlCNs8ECAEFAhw), listeners=Endpoints(endpoints={ListenerName(CONTROLLER)=54.166.219.235/<unresolved>:9093}), supportedKRaftVersion=SupportedVersionRange[min_version:0, max_version:1])}) at offset 7338 (org.apache.kafka.raft.internals.KRaftControlRecordStateMachine)
+[2025-11-30 20:17:30,083] INFO [RaftManager id=1] Starting voters are VoterSet(voters={1=VoterNode(voterKey=ReplicaKey(id=1, directoryId=WPDxH6ZlSlCNs8ECAEFAhw), listeners=Endpoints(endpoints={ListenerName(CONTROLLER)=54.166.219.235/<unresolved>:9093}), supportedKRaftVersion=SupportedVersionRange[min_version:0, max_version:1])}) (org.apache.kafka.raft.KafkaRaftClient)
+[2025-11-30 20:17:30,124] INFO [RaftManager id=1] Attempting durable transition to ResignedState(localId=1, epoch=2, voters=[1], electionTimeoutMs=1370, unackedVoters=[], preferredSuccessors=[]) from null (org.apache.kafka.raft.QuorumState)
+[2025-11-30 20:17:30,187] INFO [RaftManager id=1] Completed transition to ResignedState(localId=1, epoch=2, voters=[1], electionTimeoutMs=1370, unackedVoters=[], preferredSuccessors=[]) from null (org.apache.kafka.raft.QuorumState)
+[2025-11-30 20:17:30,194] INFO [RaftManager id=1] Completed transition to ProspectiveState(epoch=2, leaderId=OptionalInt[1], retries=1, votedKey=Optional.empty, epochElection=EpochElection(voterStates={1=VoterState(replicaKey=ReplicaKey(id=1, directoryId=WPDxH6ZlSlCNs8ECAEFAhw), state=GRANTED)}), electionTimeoutMs=1407, highWatermark=Optional.empty) from ResignedState(localId=1, epoch=2, voters=[1], electionTimeoutMs=1370, unackedVoters=[], preferredSuccessors=[]) (org.apache.kafka.raft.QuorumState)
+[2025-11-30 20:17:30,204] INFO [RaftManager id=1] Attempting durable transition to CandidateState(localId=1, localDirectoryId=WPDxH6ZlSlCNs8ECAEFAhw, epoch=3, retries=1, epochElection=EpochElection(voterStates={1=VoterState(replicaKey=ReplicaKey(id=1, directoryId=WPDxH6ZlSlCNs8ECAEFAhw), state=GRANTED)}), highWatermark=Optional.empty, electionTimeoutMs=1218) from ProspectiveState(epoch=2, leaderId=OptionalInt[1], retries=1, votedKey=Optional.empty, epochElection=EpochElection(voterStates={1=VoterState(replicaKey=ReplicaKey(id=1, directoryId=WPDxH6ZlSlCNs8ECAEFAhw), state=GRANTED)}), electionTimeoutMs=1407, highWatermark=Optional.empty) (org.apache.kafka.raft.QuorumState)
+[2025-11-30 20:17:30,214] INFO [RaftManager id=1] Completed transition to CandidateState(localId=1, localDirectoryId=WPDxH6ZlSlCNs8ECAEFAhw, epoch=3, retries=1, epochElection=EpochElection(voterStates={1=VoterState(replicaKey=ReplicaKey(id=1, directoryId=WPDxH6ZlSlCNs8ECAEFAhw), state=GRANTED)}), highWatermark=Optional.empty, electionTimeoutMs=1218) from ProspectiveState(epoch=2, leaderId=OptionalInt[1], retries=1, votedKey=Optional.empty, epochElection=EpochElection(voterStates={1=VoterState(replicaKey=ReplicaKey(id=1, directoryId=WPDxH6ZlSlCNs8ECAEFAhw), state=GRANTED)}), electionTimeoutMs=1407, highWatermark=Optional.empty) (org.apache.kafka.raft.QuorumState)
+[2025-11-30 20:17:30,222] INFO [RaftManager id=1] Attempting durable transition to Leader(localReplicaKey=ReplicaKey(id=1, directoryId=WPDxH6ZlSlCNs8ECAEFAhw), epoch=3, epochStartOffset=9865, highWatermark=Optional.empty, voterStates={1=ReplicaState(replicaKey=ReplicaKey(id=1, directoryId=WPDxH6ZlSlCNs8ECAEFAhw), endOffset=Optional.empty, lastFetchTimestamp=-1, lastCaughtUpTimestamp=-1, hasAcknowledgedLeader=true)}) from CandidateState(localId=1, localDirectoryId=WPDxH6ZlSlCNs8ECAEFAhw, epoch=3, retries=1, epochElection=EpochElection(voterStates={1=VoterState(replicaKey=ReplicaKey(id=1, directoryId=WPDxH6ZlSlCNs8ECAEFAhw), state=GRANTED)}), highWatermark=Optional.empty, electionTimeoutMs=1218) (org.apache.kafka.raft.QuorumState)
+[2025-11-30 20:17:30,230] INFO [RaftManager id=1] Completed transition to Leader(localReplicaKey=ReplicaKey(id=1, directoryId=WPDxH6ZlSlCNs8ECAEFAhw), epoch=3, epochStartOffset=9865, highWatermark=Optional.empty, voterStates={1=ReplicaState(replicaKey=ReplicaKey(id=1, directoryId=WPDxH6ZlSlCNs8ECAEFAhw), endOffset=Optional.empty, lastFetchTimestamp=-1, lastCaughtUpTimestamp=-1, hasAcknowledgedLeader=true)}) from CandidateState(localId=1, localDirectoryId=WPDxH6ZlSlCNs8ECAEFAhw, epoch=3, retries=1, epochElection=EpochElection(voterStates={1=VoterState(replicaKey=ReplicaKey(id=1, directoryId=WPDxH6ZlSlCNs8ECAEFAhw), state=GRANTED)}), highWatermark=Optional.empty, electionTimeoutMs=1218) (org.apache.kafka.raft.QuorumState)
+[2025-11-30 20:17:30,281] INFO [kafka-1-raft-outbound-request-thread]: Starting (org.apache.kafka.raft.KafkaNetworkChannel$SendThread)
+[2025-11-30 20:17:30,282] INFO [kafka-1-raft-io-thread]: Starting (org.apache.kafka.raft.KafkaRaftClientDriver)
+[2025-11-30 20:17:30,335] INFO [MetadataLoader id=1] initializeNewPublishers: the loader is still catching up because we still don't know the high water mark yet. (org.apache.kafka.image.loader.MetadataLoader)
+[2025-11-30 20:17:30,345] INFO [ControllerServer id=1] Waiting for controller quorum voters future (kafka.server.ControllerServer)
+[2025-11-30 20:17:30,345] INFO [ControllerServer id=1] Finished waiting for controller quorum voters future (kafka.server.ControllerServer)
+[2025-11-30 20:17:30,364] INFO [RaftManager id=1] High watermark set to LogOffsetMetadata(offset=9866, metadata=Optional[(segmentBaseOffset=0,relativePositionInSegment=710497)]) for the first time for epoch 3 based on indexOfHw 0 and voters [ReplicaState(replicaKey=ReplicaKey(id=1, directoryId=WPDxH6ZlSlCNs8ECAEFAhw), endOffset=Optional[LogOffsetMetadata(offset=9866, metadata=Optional[(segmentBaseOffset=0,relativePositionInSegment=710497)])], lastFetchTimestamp=-1, lastCaughtUpTimestamp=-1, hasAcknowledgedLeader=true)] (org.apache.kafka.raft.LeaderState)
+[2025-11-30 20:17:30,396] INFO [RaftManager id=1] Registered the listener org.apache.kafka.image.loader.MetadataLoader@1716844358 (org.apache.kafka.raft.KafkaRaftClient)
+[2025-11-30 20:17:30,402] INFO [MetadataLoader id=1] handleLoadSnapshot(00000000000000007339-0000000002): incrementing HandleLoadSnapshotCount to 1. (org.apache.kafka.image.loader.MetadataLoader)
+[2025-11-30 20:17:30,472] INFO [MetadataLoader id=1] handleLoadSnapshot(00000000000000007339-0000000002): generated a metadata delta between offset -1 and this snapshot in 68687 us. (org.apache.kafka.image.loader.MetadataLoader)
+[2025-11-30 20:17:30,481] INFO [MetadataLoader id=1] maybePublishMetadata(SNAPSHOT): The loader is still catching up because we have loaded up to offset 7338, but the high water mark is 9866 (org.apache.kafka.image.loader.MetadataLoader)
+[2025-11-30 20:17:30,483] INFO [MetadataLoader id=1] initializeNewPublishers: The loader is still catching up because we have loaded up to offset 7338, but the high water mark is 9866 (org.apache.kafka.image.loader.MetadataLoader)
+[2025-11-30 20:17:30,524] INFO [RaftManager id=1] Registered the listener org.apache.kafka.controller.QuorumController$QuorumMetaLogListener@283071728 (org.apache.kafka.raft.KafkaRaftClient)
+[2025-11-30 20:17:30,573] INFO [controller-1-ThrottledChannelReaper-Fetch]: Starting (kafka.server.ClientQuotaManager$ThrottledChannelReaper)
+[2025-11-30 20:17:30,577] INFO [controller-1-ThrottledChannelReaper-Produce]: Starting (kafka.server.ClientQuotaManager$ThrottledChannelReaper)
+[2025-11-30 20:17:30,582] INFO [controller-1-ThrottledChannelReaper-Request]: Starting (kafka.server.ClientQuotaManager$ThrottledChannelReaper)
+[2025-11-30 20:17:30,589] INFO [controller-1-ThrottledChannelReaper-ControllerMutation]: Starting (kafka.server.ClientQuotaManager$ThrottledChannelReaper)
+[2025-11-30 20:17:30,677] INFO [MetadataLoader id=1] maybePublishMetadata(LOG_DELTA): The loader finished catching up to the current high water mark of 9866 (org.apache.kafka.image.loader.MetadataLoader)
+[2025-11-30 20:17:30,692] INFO [MetadataLoader id=1] InitializeNewPublishers: initializing SnapshotGenerator with a snapshot at offset 9865 (org.apache.kafka.image.loader.MetadataLoader)
+[2025-11-30 20:17:30,699] INFO [ExpirationReaper-0-null]: Starting (org.apache.kafka.server.purgatory.DelayedOperationPurgatory$ExpiredOperationReaper)
+[2025-11-30 20:17:30,799] INFO [MetadataLoader id=1] InitializeNewPublishers: initializing KRaftMetadataCachePublisher with a snapshot at offset 9865 (org.apache.kafka.image.loader.MetadataLoader)
+[2025-11-30 20:17:30,805] INFO [MetadataLoader id=1] InitializeNewPublishers: initializing FeaturesPublisher with a snapshot at offset 9865 (org.apache.kafka.image.loader.MetadataLoader)
+[2025-11-30 20:17:30,800] INFO [ControllerServer id=1] Waiting for the controller metadata publishers to be installed (kafka.server.ControllerServer)
+[2025-11-30 20:17:30,806] INFO [ControllerServer id=1] Finished waiting for the controller metadata publishers to be installed (kafka.server.ControllerServer)
+[2025-11-30 20:17:30,807] INFO [SocketServer listenerType=CONTROLLER, nodeId=1] Enabling request processing. (kafka.network.SocketServer)
+[2025-11-30 20:17:30,816] INFO [ControllerServer id=1] Loaded new metadata Features(metadataVersion=4.0-IV3, finalizedFeatures={group.version=1, transaction.version=2, metadata.version=25}, finalizedFeaturesEpoch=9865). (org.apache.kafka.metadata.publisher.FeaturesPublisher)
+[2025-11-30 20:17:30,819] INFO [MetadataLoader id=1] InitializeNewPublishers: initializing ControllerRegistrationsPublisher with a snapshot at offset 9865 (org.apache.kafka.image.loader.MetadataLoader)
+[2025-11-30 20:17:30,821] INFO [MetadataLoader id=1] InitializeNewPublishers: initializing ControllerRegistrationManager with a snapshot at offset 9865 (org.apache.kafka.image.loader.MetadataLoader)
+[2025-11-30 20:17:30,826] INFO [MetadataLoader id=1] InitializeNewPublishers: initializing DynamicConfigPublisher controller id=1 with a snapshot at offset 9865 (org.apache.kafka.image.loader.MetadataLoader)
+[2025-11-30 20:17:30,827] INFO [ControllerRegistrationManager id=1 incarnation=AmgVqeh6QNy8acdw1TrCgg] Found registration for CMmjDJrcQEiaNJpTwCJrWw instead of our incarnation. (kafka.server.ControllerRegistrationManager)
+[2025-11-30 20:17:30,830] INFO [MetadataLoader id=1] InitializeNewPublishers: initializing DynamicClientQuotaPublisher controller id=1 with a snapshot at offset 9865 (org.apache.kafka.image.loader.MetadataLoader)
+[2025-11-30 20:17:30,837] INFO [MetadataLoader id=1] InitializeNewPublishers: initializing DynamicTopicClusterQuotaPublisher controller id=1 with a snapshot at offset 9865 (org.apache.kafka.image.loader.MetadataLoader)
+[2025-11-30 20:17:30,841] INFO [MetadataLoader id=1] InitializeNewPublishers: initializing ScramPublisher controller id=1 with a snapshot at offset 9865 (org.apache.kafka.image.loader.MetadataLoader)
+[2025-11-30 20:17:30,849] INFO [MetadataLoader id=1] InitializeNewPublishers: initializing DelegationTokenPublisher controller id=1 with a snapshot at offset 9865 (org.apache.kafka.image.loader.MetadataLoader)
+[2025-11-30 20:17:30,852] INFO [MetadataLoader id=1] InitializeNewPublishers: initializing ControllerMetadataMetricsPublisher with a snapshot at offset 9865 (org.apache.kafka.image.loader.MetadataLoader)
+[2025-11-30 20:17:30,852] INFO [MetadataLoader id=1] InitializeNewPublishers: initializing AclPublisher controller id=1 with a snapshot at offset 9865 (org.apache.kafka.image.loader.MetadataLoader)
+[2025-11-30 20:17:30,844] ERROR Unable to start acceptor for ListenerName(CONTROLLER) (kafka.network.DataPlaneAcceptor)
+org.apache.kafka.common.KafkaException: Socket server failed to bind to 0.0.0.0:9093: Address already in use.
+	at org.apache.kafka.server.ServerSocketFactory$KafkaServerSocketFactory.openServerSocket(ServerSocketFactory.java:56) ~[kafka-server-4.0.0.jar:?]
+	at kafka.network.Acceptor.openServerSocket(SocketServer.scala:642) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.network.Acceptor.liftedTree1$1(SocketServer.scala:543) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.network.Acceptor.start(SocketServer.scala:538) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.network.SocketServer.$anonfun$enableRequestProcessing$2(SocketServer.scala:196) ~[kafka_2.13-4.0.0.jar:?]
+	at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:863) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.uniWhenCompleteStage(CompletableFuture.java:887) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.whenComplete(CompletableFuture.java:2357) ~[?:?]
+	at kafka.network.SocketServer.chainAcceptorFuture$1(SocketServer.scala:189) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.network.SocketServer.$anonfun$enableRequestProcessing$4(SocketServer.scala:202) ~[kafka_2.13-4.0.0.jar:?]
+	at java.base/java.util.concurrent.ConcurrentHashMap$ValuesView.forEach(ConcurrentHashMap.java:4783) ~[?:?]
+	at kafka.network.SocketServer.enableRequestProcessing(SocketServer.scala:202) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.server.ControllerServer.startup(ControllerServer.scala:390) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.server.KafkaRaftServer.$anonfun$startup$1(KafkaRaftServer.scala:95) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.server.KafkaRaftServer.$anonfun$startup$1$adapted(KafkaRaftServer.scala:95) ~[kafka_2.13-4.0.0.jar:?]
+	at scala.Option.foreach(Option.scala:437) [scala-library-2.13.15.jar:?]
+	at kafka.server.KafkaRaftServer.startup(KafkaRaftServer.scala:95) [kafka_2.13-4.0.0.jar:?]
+	at kafka.Kafka$.main(Kafka.scala:97) [kafka_2.13-4.0.0.jar:?]
+	at kafka.Kafka.main(Kafka.scala) [kafka_2.13-4.0.0.jar:?]
+Caused by: java.net.BindException: Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method) ~[?:?]
+	at java.base/sun.nio.ch.Net.bind(Net.java:565) ~[?:?]
+	at java.base/sun.nio.ch.ServerSocketChannelImpl.netBind(ServerSocketChannelImpl.java:344) ~[?:?]
+	at java.base/sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:301) ~[?:?]
+	at java.base/sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:89) ~[?:?]
+	at org.apache.kafka.server.ServerSocketFactory$KafkaServerSocketFactory.openServerSocket(ServerSocketFactory.java:53) ~[kafka-server-4.0.0.jar:?]
+	... 18 more
+[2025-11-30 20:17:30,906] INFO [controller-1-to-controller-registration-channel-manager]: Starting (kafka.server.NodeToControllerRequestThread)
+[2025-11-30 20:17:30,908] INFO [ControllerRegistrationManager id=1 incarnation=AmgVqeh6QNy8acdw1TrCgg] initialized channel manager. (kafka.server.ControllerRegistrationManager)
+[2025-11-30 20:17:30,910] INFO [controller-1-to-controller-registration-channel-manager]: Recorded new KRaft controller, from now on will use node 54.166.219.235:9093 (id: 1 rack: null isFenced: false) (kafka.server.NodeToControllerRequestThread)
+[2025-11-30 20:17:30,911] INFO [ControllerServer id=1] Waiting for all of the authorizer futures to be completed (kafka.server.ControllerServer)
+[2025-11-30 20:17:30,917] INFO [ControllerServer id=1] Finished waiting for all of the authorizer futures to be completed (kafka.server.ControllerServer)
+[2025-11-30 20:17:30,917] INFO [ControllerServer id=1] Waiting for all of the SocketServer Acceptors to be started (kafka.server.ControllerServer)
+[2025-11-30 20:17:30,921] ERROR [ControllerServer id=1] Received a fatal error while waiting for all of the SocketServer Acceptors to be started (kafka.server.ControllerServer)
+java.lang.RuntimeException: Unable to start acceptor for ListenerName(CONTROLLER)
+	at kafka.network.Acceptor.liftedTree1$1(SocketServer.scala:558) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.network.Acceptor.start(SocketServer.scala:538) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.network.SocketServer.$anonfun$enableRequestProcessing$2(SocketServer.scala:196) ~[kafka_2.13-4.0.0.jar:?]
+	at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:863) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.uniWhenCompleteStage(CompletableFuture.java:887) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.whenComplete(CompletableFuture.java:2357) ~[?:?]
+	at kafka.network.SocketServer.chainAcceptorFuture$1(SocketServer.scala:189) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.network.SocketServer.$anonfun$enableRequestProcessing$4(SocketServer.scala:202) ~[kafka_2.13-4.0.0.jar:?]
+	at java.base/java.util.concurrent.ConcurrentHashMap$ValuesView.forEach(ConcurrentHashMap.java:4783) ~[?:?]
+	at kafka.network.SocketServer.enableRequestProcessing(SocketServer.scala:202) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.server.ControllerServer.startup(ControllerServer.scala:390) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.server.KafkaRaftServer.$anonfun$startup$1(KafkaRaftServer.scala:95) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.server.KafkaRaftServer.$anonfun$startup$1$adapted(KafkaRaftServer.scala:95) ~[kafka_2.13-4.0.0.jar:?]
+	at scala.Option.foreach(Option.scala:437) [scala-library-2.13.15.jar:?]
+	at kafka.server.KafkaRaftServer.startup(KafkaRaftServer.scala:95) [kafka_2.13-4.0.0.jar:?]
+	at kafka.Kafka$.main(Kafka.scala:97) [kafka_2.13-4.0.0.jar:?]
+	at kafka.Kafka.main(Kafka.scala) [kafka_2.13-4.0.0.jar:?]
+Caused by: org.apache.kafka.common.KafkaException: Socket server failed to bind to 0.0.0.0:9093: Address already in use.
+	at org.apache.kafka.server.ServerSocketFactory$KafkaServerSocketFactory.openServerSocket(ServerSocketFactory.java:56) ~[kafka-server-4.0.0.jar:?]
+	at kafka.network.Acceptor.openServerSocket(SocketServer.scala:642) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.network.Acceptor.liftedTree1$1(SocketServer.scala:543) ~[kafka_2.13-4.0.0.jar:?]
+	... 16 more
+Caused by: java.net.BindException: Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method) ~[?:?]
+	at java.base/sun.nio.ch.Net.bind(Net.java:565) ~[?:?]
+	at java.base/sun.nio.ch.ServerSocketChannelImpl.netBind(ServerSocketChannelImpl.java:344) ~[?:?]
+	at java.base/sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:301) ~[?:?]
+	at java.base/sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:89) ~[?:?]
+	at org.apache.kafka.server.ServerSocketFactory$KafkaServerSocketFactory.openServerSocket(ServerSocketFactory.java:53) ~[kafka-server-4.0.0.jar:?]
+	at kafka.network.Acceptor.openServerSocket(SocketServer.scala:642) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.network.Acceptor.liftedTree1$1(SocketServer.scala:543) ~[kafka_2.13-4.0.0.jar:?]
+	... 16 more
+[2025-11-30 20:17:30,925] ERROR Encountered fatal fault: caught exception (org.apache.kafka.server.fault.ProcessTerminatingFaultHandler)
+java.lang.RuntimeException: Received a fatal error while waiting for all of the SocketServer Acceptors to be started
+	at org.apache.kafka.server.util.FutureUtils.waitWithLogging(FutureUtils.java:73) ~[kafka-server-common-4.0.0.jar:?]
+	at kafka.server.ControllerServer.startup(ControllerServer.scala:415) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.server.KafkaRaftServer.$anonfun$startup$1(KafkaRaftServer.scala:95) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.server.KafkaRaftServer.$anonfun$startup$1$adapted(KafkaRaftServer.scala:95) ~[kafka_2.13-4.0.0.jar:?]
+	at scala.Option.foreach(Option.scala:437) [scala-library-2.13.15.jar:?]
+	at kafka.server.KafkaRaftServer.startup(KafkaRaftServer.scala:95) [kafka_2.13-4.0.0.jar:?]
+	at kafka.Kafka$.main(Kafka.scala:97) [kafka_2.13-4.0.0.jar:?]
+	at kafka.Kafka.main(Kafka.scala) [kafka_2.13-4.0.0.jar:?]
+Caused by: java.lang.RuntimeException: Unable to start acceptor for ListenerName(CONTROLLER)
+	at kafka.network.Acceptor.liftedTree1$1(SocketServer.scala:558) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.network.Acceptor.start(SocketServer.scala:538) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.network.SocketServer.$anonfun$enableRequestProcessing$2(SocketServer.scala:196) ~[kafka_2.13-4.0.0.jar:?]
+	at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:863) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.uniWhenCompleteStage(CompletableFuture.java:887) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.whenComplete(CompletableFuture.java:2357) ~[?:?]
+	at kafka.network.SocketServer.chainAcceptorFuture$1(SocketServer.scala:189) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.network.SocketServer.$anonfun$enableRequestProcessing$4(SocketServer.scala:202) ~[kafka_2.13-4.0.0.jar:?]
+	at java.base/java.util.concurrent.ConcurrentHashMap$ValuesView.forEach(ConcurrentHashMap.java:4783) ~[?:?]
+	at kafka.network.SocketServer.enableRequestProcessing(SocketServer.scala:202) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.server.ControllerServer.startup(ControllerServer.scala:390) ~[kafka_2.13-4.0.0.jar:?]
+	... 6 more
+Caused by: org.apache.kafka.common.KafkaException: Socket server failed to bind to 0.0.0.0:9093: Address already in use.
+	at org.apache.kafka.server.ServerSocketFactory$KafkaServerSocketFactory.openServerSocket(ServerSocketFactory.java:56) ~[kafka-server-4.0.0.jar:?]
+	at kafka.network.Acceptor.openServerSocket(SocketServer.scala:642) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.network.Acceptor.liftedTree1$1(SocketServer.scala:543) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.network.Acceptor.start(SocketServer.scala:538) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.network.SocketServer.$anonfun$enableRequestProcessing$2(SocketServer.scala:196) ~[kafka_2.13-4.0.0.jar:?]
+	at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:863) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.uniWhenCompleteStage(CompletableFuture.java:887) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.whenComplete(CompletableFuture.java:2357) ~[?:?]
+	at kafka.network.SocketServer.chainAcceptorFuture$1(SocketServer.scala:189) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.network.SocketServer.$anonfun$enableRequestProcessing$4(SocketServer.scala:202) ~[kafka_2.13-4.0.0.jar:?]
+	at java.base/java.util.concurrent.ConcurrentHashMap$ValuesView.forEach(ConcurrentHashMap.java:4783) ~[?:?]
+	at kafka.network.SocketServer.enableRequestProcessing(SocketServer.scala:202) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.server.ControllerServer.startup(ControllerServer.scala:390) ~[kafka_2.13-4.0.0.jar:?]
+	... 6 more
+Caused by: java.net.BindException: Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method) ~[?:?]
+	at java.base/sun.nio.ch.Net.bind(Net.java:565) ~[?:?]
+	at java.base/sun.nio.ch.ServerSocketChannelImpl.netBind(ServerSocketChannelImpl.java:344) ~[?:?]
+	at java.base/sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:301) ~[?:?]
+	at java.base/sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:89) ~[?:?]
+	at org.apache.kafka.server.ServerSocketFactory$KafkaServerSocketFactory.openServerSocket(ServerSocketFactory.java:53) ~[kafka-server-4.0.0.jar:?]
+	at kafka.network.Acceptor.openServerSocket(SocketServer.scala:642) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.network.Acceptor.liftedTree1$1(SocketServer.scala:543) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.network.Acceptor.start(SocketServer.scala:538) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.network.SocketServer.$anonfun$enableRequestProcessing$2(SocketServer.scala:196) ~[kafka_2.13-4.0.0.jar:?]
+	at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:863) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.uniWhenCompleteStage(CompletableFuture.java:887) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.whenComplete(CompletableFuture.java:2357) ~[?:?]
+	at kafka.network.SocketServer.chainAcceptorFuture$1(SocketServer.scala:189) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.network.SocketServer.$anonfun$enableRequestProcessing$4(SocketServer.scala:202) ~[kafka_2.13-4.0.0.jar:?]
+	at java.base/java.util.concurrent.ConcurrentHashMap$ValuesView.forEach(ConcurrentHashMap.java:4783) ~[?:?]
+	at kafka.network.SocketServer.enableRequestProcessing(SocketServer.scala:202) ~[kafka_2.13-4.0.0.jar:?]
+	at kafka.server.ControllerServer.startup(ControllerServer.scala:390) ~[kafka_2.13-4.0.0.jar:?]
+	... 6 more
